@@ -35,10 +35,39 @@ export abstract class ResponseSuccess<TypeData> {
   })
   @Expose()
   meta: Meta;
+}
+
+export abstract class PaginateResponseDto<TypeData> {
+  abstract get items(): TypeData;
 
   @ApiProperty({
-    description: 'Status',
+    description: 'Quantidade de itens',
   })
   @Expose()
-  success: boolean;
+  itemCount: number;
+
+  @ApiProperty({
+    description: 'Próximo item',
+  })
+  @Expose()
+  next: string;
+
+  @ApiProperty({
+    description: 'Quantidade de páginas',
+  })
+  @Expose()
+  pageCount: number;
+
+  @ApiProperty({
+    description: 'Item anterior',
+  })
+  @Expose()
+  previous: string;
+
+  @ApiProperty({
+    description: 'Total de itens',
+  })
+  @Expose()
+  totalItems: number;
+
 }

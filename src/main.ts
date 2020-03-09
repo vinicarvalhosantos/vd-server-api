@@ -31,7 +31,8 @@ async function bootstrap() {
     .setTitle(pckg.name)
     .setDescription(pckg.description)
     .setVersion(pckg.version)
-    .addTag('users', 'Configuração dos clientes')
+    .addTag('motive', 'Configuração de motivos')
+    .addTag('users', 'Configuração de usuários')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

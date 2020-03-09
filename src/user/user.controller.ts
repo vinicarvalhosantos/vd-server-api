@@ -33,23 +33,7 @@ export class UserController {
   @ApiQuery({ name: "offset", required: false, type: Number })
   @ResponseMapper(ResponseReadUserDto)
   async findAll(@Query('limit') limit: number = 100, @Query('offset') page: number = 1) {
-    limit = limit > 100 || limit < 1 ? 100 : limit;
-    page = page < 1 ? 1 : page
-    let data = await this.userService.paginate({ page, limit });
-    const hostname = require("os").hostname();
-    let response = new ResponseReadUserDto();
-    let meta = new Meta();
-    response.records = [];
-
-    meta.server = hostname;
-    meta.limit = limit;
-    meta.offset = page;
-    meta.recordCount = data.items.length;
-
-    response.meta = meta;
-    response.records = data.items;
-    response.success = true;
-    return response;
+    return await this.userService.paginate({ page, limit });
   }
 
   @Get(':userId')
@@ -57,7 +41,7 @@ export class UserController {
   @UseInterceptors(HttpSuccessFilter)
   @ApiResponse({ status: 200, description: 'Busca do registro realizadado com sucesso.', type: ReadUserDto })
   @ApiResponse({ status: 404, description: 'Registro não encontrado' })
-  @ApiParam({ name: "useId" })
+  @ApiParam({ name: "userId" })
   @ResponseMapper(ReadUserDto)
   async findById(@Param() params: FindOneParams) {
     return await this.userService.findOne(params.userId);

@@ -5,8 +5,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=shura-api
       - MYSQL_DATABASE=shura-api
-      - MYSQL_USER=vshura-api
-      - MYSQL_PASSWORD=server-api
+      - MYSQL_USER=shura-api
+      - MYSQL_PASSWORD=shura-api
     expose:
       - '3306'
     ports:

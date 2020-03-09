@@ -1,9 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type, Exclude } from 'class-transformer';
-import { ResponseSuccess } from '../../base/dto/defaultResponse.dto';
+import { ResponseSuccess, PaginateResponseDto } from '../../base/dto/defaultResponse.dto';
 import { UserPermissionEnum } from '../user.enum';
 
 export class ReadUserDto {
+  @ApiProperty({
+    description: 'ID do usuário'
+  })
+  @Expose()
+  
+  id: number;
   @ApiProperty({
     description: 'ID do usuário'
   })
@@ -41,9 +47,9 @@ export class ReadUserDto {
   updatedAt: Date;
 }
 
-export class ResponseReadUserDto extends ResponseSuccess<ReadUserDto[]> {
+export class ResponseReadUserDto extends PaginateResponseDto<ReadUserDto[]> {
   @ApiProperty({ type: ReadUserDto, isArray: true })
   @Expose()
   @Type(() => ReadUserDto)
-  records: ReadUserDto[];
+  items: ReadUserDto[];
 }

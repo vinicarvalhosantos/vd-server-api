@@ -4,26 +4,29 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class HttpSuccessFilter<T> implements NestInterceptor<T, any>{
-    getResponse(data: any) {
+    getResponse(data: any, offset: number, limit: number) {
         const hostname = require("os").hostname();
-        const records = [
-            data
-        ]
-        const recordCount = data.length != undefined ? data.length : records.length;
+        const recordCount = data ? data.itemCount || 1 : 0;
+        const records = data ? data.items || [data] : [];
+
         const meta = {
             meta: {
                 server: hostname,
-                recordCount: recordCount
+                recordCount: recordCount,
+                offset: offset,
+                limit: limit
             },
-            records: records,
-            success: true
+            records: records
         }
         return meta;
     }
 
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+        const request = context.getArgs()[0];
+        const offset = parseInt(request.query.offset || 1);
+        const limit = parseInt(request.query.limit || 100);
         return next.handle().pipe(map(data => {
-            return this.getResponse(data);
+            return this.getResponse(data, offset, limit);
         }));
     }
 }

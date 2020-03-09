@@ -1,13 +1,16 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm';
 
 @Entity()
-export class Motives {
+export class Motive {
 
-  @PrimaryGeneratedColumn("increment", { name: "userId" })
+  @PrimaryColumn({ name: "motive_id" })
   motiveId: number;
 
-  @Column({ name: "description"})
-  description: string;
+  @Column({ name: "motive_description" })
+  motiveDescription: string;
+
+  @Column({ name: "block_time" })
+  blockTime: number;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt?: Date;

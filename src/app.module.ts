@@ -8,6 +8,7 @@ import { ConfigurationModule } from './config/configuration.module';
 import { TerminusOptionsService } from './health/terminus-options.service';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthModule } from './health/health.module';
+import { MotiveModule } from './motive/motive.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -34,6 +35,7 @@ import { UserModule } from './user/user.module';
       imports: [HealthModule],
       useClass: TerminusOptionsService,
     }),
+    MotiveModule,
     UserModule
   ]
 })

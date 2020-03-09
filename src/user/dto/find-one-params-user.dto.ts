@@ -1,6 +1,6 @@
-import { IsUUID, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class FindOneParams {
-  @IsUUID('4')
+  @IsString()
   userId: string;
 }
