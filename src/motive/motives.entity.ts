@@ -1,20 +1,13 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
-import { UserPermissionEnum, UserStatusEnum } from './user.enum';
 
 @Entity()
-export class User {
+export class Motives {
 
   @PrimaryGeneratedColumn("increment", { name: "userId" })
-  id: number;
+  motiveId: number;
 
-  @Column({ name: "userId", unique: true })
-  userId: string;
-
-  @Column({ name: "username" })
-  username: string;
-
-  @Column({ name: "status" })
-  status: number;
+  @Column({ name: "description"})
+  description: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   createdAt?: Date;

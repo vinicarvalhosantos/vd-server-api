@@ -1,8 +1,8 @@
 {
-  "name": "vd-server-api",
+  "name": "shura-api",
   "version": "1.0.0",
-  "description": "Aplicativo responsável pelo gerenciamento de usuários entre site e game server.",
-  "author": "Vinicius Santos",
+  "description": "Aplicativo responsável pelo gerenciamento de bloqueio e desbloqueio do Caixa Móvel.",
+  "author": "Luizalabs",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
