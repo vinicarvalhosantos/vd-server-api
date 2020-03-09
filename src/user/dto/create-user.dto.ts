@@ -4,35 +4,30 @@ import { UserPermissionEnum } from '../user.enum';
 
 export class CreateUserDto {
   @ApiProperty({
-    description: 'Unique Id do usuário'
-})
-@IsNotEmpty()
-@IsString()
-userUniqueId: string;
+    description: 'Id do usuário'
+  })
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
 
-@ApiProperty({
+  @ApiProperty({
     description: 'Nome de usuário'
-})
-@IsNotEmpty()
-@IsString()
-username: string;
+  })
+  @IsNotEmpty()
+  @IsString()
+  username: string;
 
-@ApiProperty({
-    description: 'Senha do usuário'
-})
-@IsNotEmpty()
-@IsString()
-password: string;
+  @ApiProperty({
+    description: 'ID da Filial'
+  })
+  @IsNotEmpty()
+  @IsString()
+  branchId: string;
 
-@ApiProperty({
-    description: 'Email do usuário'
-})
-@IsNotEmpty()
-@IsString()
-userEmail: string;
-
-@ApiProperty({
-    description: 'Nivel de permissão(Cargo) do usuário'
-})
-userPermission: UserPermissionEnum;
+  @ApiProperty({
+    description: 'Status ativação Caixa Móvel'
+  })
+  @IsNotEmpty()
+  @IsNumber()
+  status: number;
 }

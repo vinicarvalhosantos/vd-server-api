@@ -11,37 +11,19 @@ export class ReadUserDto {
   userId: number;
 
   @ApiProperty({
-    description: 'UniqueId do usuário'
-  })
-  @Expose()
-  userUniqueId: string;
-
-  @ApiProperty({
     description: 'Nome de usuário'
   })
   @Expose()
   username: string
 
   @ApiProperty({
-    description: "Senha do usuário"
+    description: "Id da Filial"
   })
   @Exclude()
-  password: string;
+  branchID: string;
 
   @ApiProperty({
-    description: 'Email do usuário'
-  })
-  @Expose()
-  userEmail: string;
-
-  @ApiProperty({
-    description: 'Nivel de permissão(Cargo) do usuário'
-  })
-  @Expose()
-  userPermission: UserPermissionEnum;
-
-  @ApiProperty({
-    description: 'Status do usuário'
+    description: 'Status ativação Caixa Móvel'
   })
   @Expose()
   status: number;

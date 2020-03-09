@@ -52,26 +52,14 @@ export class UserController {
     return response;
   }
 
-  @Get(':userUniqueId')
+  @Get(':userId')
   @ApiOperation({ summary: 'Buscar usuário pelo id' })
   @UseInterceptors(HttpSuccessFilter)
   @ApiResponse({ status: 200, description: 'Busca do registro realizadado com sucesso.', type: ReadUserDto })
   @ApiResponse({ status: 404, description: 'Registro não encontrado' })
-  @ApiParam({ name: "userUniqueId" })
+  @ApiParam({ name: "useId" })
   @ResponseMapper(ReadUserDto)
   async findById(@Param() params: FindOneParams) {
-    return await this.userService.findOne(params.userUniqueId);
+    return await this.userService.findOne(params.userId);
   }
-
-  @Get(':email')
-  @ApiOperation({ summary: 'Buscar usuário pelo email' })
-  @UseInterceptors(HttpSuccessFilter)
-  @ApiResponse({ status: 200, description: 'Busca do registro realizadado com sucesso.', type: ReadUserDto })
-  @ApiResponse({ status: 404, description: 'Registro não encontrado' })
-  @ApiParam({ name: "email" })
-  @ResponseMapper(ReadUserDto)
-  async findByEmail(@Param() params: FindOneParams) {
-    return await this.userService.findOne(params.email);
-  }
-
 }

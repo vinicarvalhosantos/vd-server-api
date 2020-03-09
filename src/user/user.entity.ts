@@ -4,7 +4,7 @@ import { UserPermissionEnum, UserStatusEnum } from './user.enum';
 @Entity()
 export class User {
 
-  @PrimaryGeneratedColumn("increment", { name: "userId" })
+  @PrimaryGeneratedColumn("increment", { name: "id" })
   id: number;
 
   @Column({ name: "userId", unique: true })
@@ -12,6 +12,9 @@ export class User {
 
   @Column({ name: "username" })
   username: string;
+
+  @Column({ name: "branchId" })
+  branchId: string;
 
   @Column({ name: "status" })
   status: number;
