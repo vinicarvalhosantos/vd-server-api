@@ -7,7 +7,7 @@ export class CreateMotiveDto {
         example: '007'
     })
     @IsNotEmpty()
-    motiveId: number;
+    motiveId: string;
 
     @ApiProperty({
         description: 'Descrição do motivo para o bloqueio/debloqueio',

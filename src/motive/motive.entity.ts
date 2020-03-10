@@ -1,10 +1,13 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from 'typeorm';
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryColumn, PrimaryGeneratedColumn, Index } from 'typeorm';
 
 @Entity()
 export class Motive {
 
-  @PrimaryColumn({ name: "motive_id" })
-  motiveId: number;
+  @PrimaryGeneratedColumn("increment", { name: "id" })
+  id: number;
+
+  @Column({ name: "motive_id", unique: true })
+  motiveId: string;
 
   @Column({ name: "motive_description" })
   motiveDescription: string;

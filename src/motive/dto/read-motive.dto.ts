@@ -5,10 +5,17 @@ import { ResponseSuccess, PaginateResponseDto } from '../../base/dto/defaultResp
 export class ReadMotiveDto {
   @ApiProperty({
     description: 'Id do motivo do bloqueio/desbloqueio',
+    example: '1'
+  })
+  @Expose()
+  id: number;
+
+  @ApiProperty({
+    description: 'Id do motivo do bloqueio/desbloqueio do JIRA',
     example: '007'
   })
   @Expose()
-  motiveId: number;
+  motiveId: string;
 
   @ApiProperty({
     description: 'Descrição do motivo para o bloqueio/debloqueio',

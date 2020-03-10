@@ -3,6 +3,14 @@ import { IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateMotiveDto {
     @ApiProperty({
+        description: 'ID do motivo para o bloqueio/debloqueio do JIRA',
+        example: '007'
+    })
+    @IsNotEmpty()
+    @IsString()
+    motiveId: string;
+
+    @ApiProperty({
         description: 'Descrição do motivo para o bloqueio/debloqueio',
         example: 'Vendedor sem Pin Pad'
     })
