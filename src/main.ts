@@ -33,7 +33,6 @@ async function bootstrap() {
     .setVersion(pckg.version)
     .addTag('motive', 'Configuração de motivos')
     .addTag('users', 'Configuração de usuários')
-    .addTag('history', 'Configuração de histórico')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
