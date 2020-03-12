@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type, Exclude } from 'class-transformer';
 import { ResponseSuccess, PaginateResponseDto } from '../../base/dto/defaultResponse.dto';
-
+import { UserPermissionEnum } from '../user.enum';
 
 export class ReadUserDto {
   @ApiProperty({

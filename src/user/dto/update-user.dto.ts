@@ -1,13 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { UserPermissionEnum, UserStatusEnum } from '../user.enum';
 
-export class UserDto {
-  // @ApiProperty({
-  //   description: 'Id do usuário'
-  // })
-  // @IsNotEmpty()
-  // @IsString()
-  // userId: string;
+export class UpdateUserDto {
+  @ApiProperty({
+    description: 'Unique Id do usuário'
+  })
+  @IsNotEmpty()
+  @IsString()
+  userId: string;
 
   @ApiProperty({
     description: 'Nome de usuário'
@@ -16,18 +17,11 @@ export class UserDto {
   @IsString()
   username: string;
 
-  @ApiProperty({
-    description: 'ID da Filial'
-  })
-  @IsNotEmpty()
-  @IsString()
-  branchId: string;
-
 
   @ApiProperty({
     description: 'Status ativação Caixa Móvel'
   })
   @IsNotEmpty()
   @IsNumber()
-  status: number;
+  branchID: number;
 }
