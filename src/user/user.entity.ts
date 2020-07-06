@@ -1,5 +1,5 @@
-import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn } from 'typeorm';
-import { UserPermissionEnum, UserStatusEnum } from './user.enum';
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryGeneratedColumn, Index } from 'typeorm';
+
 
 @Entity()
 export class User {
@@ -7,13 +7,13 @@ export class User {
   @PrimaryGeneratedColumn("increment", { name: "id" })
   id: number;
 
-  @Column({ name: "userId", unique: true })
+  @Column({ name: "user_id", unique: true })
   userId: string;
 
   @Column({ name: "username" })
   username: string;
 
-  @Column({ name: "branchId" })
+  @Column({ name: "branch_id" })
   branchId: string;
 
   @Column({ name: "status" })

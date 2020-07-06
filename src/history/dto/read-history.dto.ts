@@ -2,14 +2,13 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type, Exclude } from 'class-transformer';
 import { ResponseSuccess, PaginateResponseDto } from '../../base/dto/defaultResponse.dto';
 
-
-export class ReadUserDto {
+export class ReadHistoryDto {
   @ApiProperty({
-    description: 'ID do usuário'
+    description: 'ID do histórico'
   })
   @Expose()
   
-  id: number;
+  historyId: number;
   @ApiProperty({
     description: 'ID do usuário'
   })
@@ -17,26 +16,17 @@ export class ReadUserDto {
   userId: number;
 
   @ApiProperty({
-    description: 'Nome de usuário'
+    description: 'Id do motivo'
   })
   @Expose()
-  username: string
+  motiveId: number;
 
   @ApiProperty({
-    description: "Id da Filial"
-  })
-  @Exclude()
-  branchID: string;
-
-  @ApiProperty({
-    description: 'Status ativação Caixa Móvel'
+    description: 'Data histórico'
   })
   @Expose()
-  status: number;
+  date: Date;
 
-  @ApiProperty({
-    description: 'Data de criação'
-  })
   @Expose()
   createdAt: Date;
 
@@ -47,9 +37,9 @@ export class ReadUserDto {
   updatedAt: Date;
 }
 
-export class ResponseReadUserDto extends PaginateResponseDto<ReadUserDto[]> {
-  @ApiProperty({ type: ReadUserDto, isArray: true })
+export class ResponseReadHistoryDto extends PaginateResponseDto<ReadHistoryDto[]> {
+  @ApiProperty({ type: ReadHistoryDto, isArray: true })
   @Expose()
-  @Type(() => ReadUserDto)
-  items: ReadUserDto[];
+  @Type(() => ReadHistoryDto)
+  items: ReadHistoryDto[];
 }

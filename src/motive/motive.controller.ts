@@ -15,7 +15,7 @@ export class MotiveController {
   constructor(private readonly motiveService: MotiveService) { }
 
   @Post()
-  @ApiOperation({ summary: 'Criar um novo usuário' })
+  @ApiOperation({ summary: 'Criar um novo motivo' })
   @ApiBody({ type: CreateMotiveDto })
   @UseInterceptors(HttpSuccessFilter)
   @ApiResponse({ status: 201, description: 'Registro inserido com sucesso.', type: ReadMotiveDto })
@@ -27,8 +27,8 @@ export class MotiveController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Listar todas as transações' })
-  @ApiResponse({ status: 200, description: 'Listagem dos registro realizadado com sucesso.', type: PaginateResponseDto })
+  @ApiOperation({ summary: 'Listar todos os motivos' })
+  @ApiResponse({ status: 200, description: 'Listagem dos registro realizadado com sucesso.', type: ResponseReadMotiveDto })
   @ApiQuery({ name: "limit", required: false, type: Number })
   @ApiQuery({ name: "offset", required: false, type: Number })
   @UseInterceptors(HttpSuccessFilter)
