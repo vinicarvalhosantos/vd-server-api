@@ -1,8 +1,8 @@
 {
-  "name": "shura-api",
-  "version": "1.0.0",
-  "description": "Aplicativo responsável pelo gerenciamento de bloqueio e desbloqueio do Caixa Móvel.",
-  "author": "Luizalabs",
+  "name": "vd-server-api",
+  "version": "v1.0.0",
+  "description": "Aplicativo responsável pelo gerenciamento de usuários e compras.",
+  "author": "Vinicius \"Vivi\" Santos",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
