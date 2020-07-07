@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './filter/http-exception.filter';
 import { LogService } from './logger/log.service';
 import { ConfigurationService } from './config/configuration.service';
+import { HttpSuccessFilter } from './filter/http-success.filter';
 
 const pckg = require('../package.json');
 
@@ -23,6 +24,8 @@ async function bootstrap() {
 
   app.useGlobalFilters(new HttpExceptionFilter(app.get(LogService)));
 
+  app.useGlobalInterceptors(new HttpSuccessFilter())
+
   app.useLogger(app.get(LogService));
 
   app.useGlobalPipes(new ValidationPipe());
@@ -31,7 +34,6 @@ async function bootstrap() {
     .setTitle(pckg.name)
     .setDescription(pckg.description)
     .setVersion(pckg.version)
-    .addTag('motive', 'Configuração de motivos')
     .addTag('users', 'Configuração de usuários')
     .addTag('history', 'Configuração de histórico')
     .build();

@@ -1,11 +1,11 @@
 export default () => ({
-  port: parseInt(process.env.PORT) || 3000,
+  port: parseInt(process.env.PORT) || 5000,
   database: {
     host: process.env.DATABASE_HOST || 'localhost',
     port: parseInt(process.env.DATABASE_PORT) || 3306,
-    username: process.env.DATABASE_USERNAME || 'shura-api',
-    password: process.env.DATABASE_PASSWORD || 'shura-api',
-    name: process.env.DATABASE_NAME || 'shura-api',
+    username: process.env.DATABASE_USERNAME || 'vd-server-api',
+    password: process.env.DATABASE_PASSWORD || 'vd-server-api',
+    name: process.env.DATABASE_NAME || 'vd-server-api',
     synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE) || true,
     logging: Boolean(process.env.DATABASE_LOGGING) || true,
   },

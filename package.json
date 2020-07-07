@@ -37,6 +37,7 @@
     "compression": "^1.7.4",
     "helmet": "^3.21.2",
     "mysql2": "^2.0.2",
+    "md5": "^2.2.1",
     "nestjs-typeorm-paginate": "^1.0.3",
     "nock": "^11.7.2",
     "reflect-metadata": "^0.1.13",

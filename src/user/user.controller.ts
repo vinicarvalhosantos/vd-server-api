@@ -1,12 +1,9 @@
-import { Controller, Get, Body, Post, Param, UseInterceptors, Query, Put } from '@nestjs/common';
+import { Controller, Get, Body, Post, Param, Query, Put } from '@nestjs/common';
 import { ApiTags, ApiResponse, ApiOperation, ApiParam, ApiBody, ApiQuery } from '@nestjs/swagger';
-import { CreateUserDto, ReadUserDto, FindOneParams } from './dto';
+import { CreateUserDto, ReadUserDto, FindOneParams, UpdateUserDto } from './dto';
 import { UserService } from './user.service';
 import { ResponseMapper } from '../decorator/response-mapper.decorator';
-import { HttpSuccessFilter } from '../filter/http-success.filter';
 import { ResponseReadUserDto } from './dto/read-user.dto';
-import { Meta } from '../base/dto/defaultResponse.dto';
-import { UserDto } from './dto/update-user.dto';
 
 @Controller('api/v1/users')
 @ApiTags('users')
@@ -15,38 +12,70 @@ import { UserDto } from './dto/update-user.dto';
 export class UserController {
   constructor(private readonly userService: UserService) { }
 
+  @Post()
+  @ApiOperation({ summary: 'Criar um novo usuário' })
+  @ApiBody({ type: CreateUserDto })
+  @ApiResponse({ status: 201, description: 'Registro inserido com sucesso.', type: ReadUserDto })
+  @ApiResponse({ status: 404, description: 'Registro não encontrado' })
+  @ApiResponse({ status: 500, description: 'Erro na tentativa de inserir o registro' })
+  @ResponseMapper(ReadUserDto)
+  async create(@Body() createUserDto: CreateUserDto) {
+    return await this.userService.create(createUserDto);
+  }
+
+  @Put('edit/:userUniqueId')
+  @ApiOperation({ summary: 'Alterar informações de usuário' })
+  @ApiBody({ type: UpdateUserDto })
+  @ApiResponse({ status: 200, description: 'Registro alterado com sucesso.', type: ReadUserDto })
+  @ApiResponse({ status: 404, description: 'Registro não encontrado' })
+  @ApiResponse({ status: 500, description: 'Erro na tentativa de alterar o registro' })
+  @ApiParam({ name: "userUniqueId" })
+  @ResponseMapper(ReadUserDto)
+  async update(@Param() params: FindOneParams, @Body() updateUserDto: UpdateUserDto) {
+    console.log(`${params.userUniqueId}\n${JSON.stringify(updateUserDto)}`);
+    return await this.userService.updateUser(params.userUniqueId, updateUserDto);
+  }
+
   @Get()
   @ApiOperation({ summary: 'Listar todos os usuários' })
   @ApiResponse({ status: 200, description: 'Listagem dos usuários realizadado com sucesso.', type: ResponseReadUserDto })
   @ApiQuery({ name: "limit", required: false, type: Number })
   @ApiQuery({ name: "offset", required: false, type: Number })
-  @UseInterceptors(HttpSuccessFilter)
-  @ResponseMapper(ReadUserDto)
+  @ResponseMapper(ResponseReadUserDto)
   async findAll(@Query('limit') limit: number = 100, @Query('offset') page: number = 1) {
     return await this.userService.paginate({ page, limit });
   }
 
-  @Get(':userId')
+  @Get('uuid/:userUniqueId')
   @ApiOperation({ summary: 'Buscar usuário pelo id' })
-  @UseInterceptors(HttpSuccessFilter)
-  @ApiResponse({ status: 200, description: 'Busca do registro realizadado com sucesso.', type: ResponseReadUserDto })
+  @ApiResponse({ status: 200, description: 'Busca do registro realizadado com sucesso.', type: ReadUserDto })
   @ApiResponse({ status: 404, description: 'Registro não encontrado' })
-  @ApiParam({ name: "userId" })
+  @ApiParam({ name: "userUniqueId" })
   @ResponseMapper(ReadUserDto)
-  async findById(@Param() params: FindOneParams) {
-    return await this.userService.findOne(params.userId);
+  async findByUUId(@Param() params: FindOneParams) {
+    return await this.userService.findOne(params.userUniqueId);
   }
 
-  @Put(':userId')
-  @ApiOperation({ summary: 'Atualizar status caixa móvel do usuário' })
-  @UseInterceptors(HttpSuccessFilter)
-  @ApiBody({ type: UserDto })
-  @ApiParam({ name: "userId" })
-  @ApiResponse({ status: 201, description: 'Registro atualizado com sucesso.', type: ResponseReadUserDto })
+  @Get('email/:userEmail')
+  @ApiOperation({ summary: 'Buscar usuário pelo email' })
+  @ApiResponse({ status: 200, description: 'Busca do registro realizadado com sucesso.', type: ReadUserDto })
   @ApiResponse({ status: 404, description: 'Registro não encontrado' })
-  @ApiResponse({ status: 500, description: 'Erro na tentativa de atualizar o registro' })
-  @ResponseMapper(UserDto)
-  async updateStatusUser(@Param() params: FindOneParams, @Body() updateUserDto: UserDto) {
-    return await this.userService.updateUser(params.userId, updateUserDto);
+  @ApiParam({ name: "userEmail" })
+  @ResponseMapper(ReadUserDto)
+  async findByEmail(@Param() userEmail: string) {
+    const realUserEmail = JSON.parse(JSON.stringify(userEmail)).userEmail;
+    return await this.userService.findOneByEmail(realUserEmail);
   }
+
+  @Get('username/:username')
+  @ApiOperation({ summary: 'Buscar usuário pelo email' })
+  @ApiResponse({ status: 200, description: 'Busca do registro realizadado com sucesso.', type: ReadUserDto })
+  @ApiResponse({ status: 404, description: 'Registro não encontrado' })
+  @ApiParam({ name: "username" })
+  @ResponseMapper(ReadUserDto)
+  async findByUsername(@Param() username: string) {
+    const realUsername = JSON.parse(JSON.stringify(username)).username;
+    return await this.userService.findOneByUsername(realUsername);
+  }
+
 }

@@ -15,7 +15,7 @@ export class BaseCrudService<TEntity> {
   }
 
   findOne(
-    idOrOptions: number | FindOneOptions<TEntity> | string,
+    idOrOptions: FindOneOptions<TEntity>,
   ): Promise<TEntity> {
     return this.baseRepository.findOne(idOrOptions as any).then(entity => {
       if (!entity) throw new NotFoundException();

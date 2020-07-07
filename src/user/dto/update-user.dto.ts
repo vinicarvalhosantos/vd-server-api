@@ -1,13 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsUUID, IsEmail } from 'class-validator';
 
-export class UserDto {
-  // @ApiProperty({
-  //   description: 'Id do usuário'
-  // })
-  // @IsNotEmpty()
-  // @IsString()
-  // userId: string;
+export class UpdateUserDto {
 
   @ApiProperty({
     description: 'Nome de usuário'
@@ -17,17 +11,18 @@ export class UserDto {
   username: string;
 
   @ApiProperty({
-    description: 'ID da Filial'
+    description: 'Senha do usuário'
   })
   @IsNotEmpty()
   @IsString()
-  branchId: string;
-
+  password: string;
 
   @ApiProperty({
-    description: 'Status ativação Caixa Móvel'
+    description: 'Email do usuário'
   })
   @IsNotEmpty()
-  @IsNumber()
-  status: number;
+  @IsEmail()
+  @IsString()
+  userEmail: string;
+
 }

@@ -1,20 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, Type, Exclude } from 'class-transformer';
 import { ResponseSuccess, PaginateResponseDto } from '../../base/dto/defaultResponse.dto';
+import { IsUUID } from 'class-validator';
 
 
 export class ReadUserDto {
+  @IsUUID()
   @ApiProperty({
-    description: 'ID do usuário'
+    description: 'UniqueId do usuário'
   })
   @Expose()
-  
-  id: number;
-  @ApiProperty({
-    description: 'ID do usuário'
-  })
-  @Expose()
-  userId: number;
+  userUniqueId: string;
 
   @ApiProperty({
     description: 'Nome de usuário'
@@ -23,16 +19,16 @@ export class ReadUserDto {
   username: string
 
   @ApiProperty({
-    description: "Id da Filial"
+    description: "Senha do usuário"
   })
   @Exclude()
-  branchID: string;
+  password: string;
 
   @ApiProperty({
-    description: 'Status ativação Caixa Móvel'
+    description: 'Email do usuário'
   })
   @Expose()
-  status: number;
+  userEmail: string;
 
   @ApiProperty({
     description: 'Data de criação'

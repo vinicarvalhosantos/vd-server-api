@@ -11,21 +11,15 @@ export class UserCrudService extends BaseCrudService<User> {
     super(repository);
   }
 
-  findOneUser(
-    idOrOptions: number | FindOneOptions<User> | string,
-  ): Promise<User> {
-    return this.repository.findOne(idOrOptions as any).then(entity => {
-      return entity;
-    });
-  }
 
-  updateUser(userid: number | string, model: User): Promise<User> {
+  updateUser(userUniqueId: string, model: User): Promise<User> {
     return this.repository
-      .findOne({ where: { userId: userid } })
+      .findOne({ where: { userUniqueId: userUniqueId } })
       .then(entity => {
         if (!entity) throw new NotFoundException();
-        return this.repository.update(userid, model);
+        return this.repository.update(userUniqueId, model);
       })
-      .then(() => this.repository.findOne({ where: { userId: userid } }));
+      .then(() => this.repository.findOne({ where: { userUniqueId: userUniqueId } }));
   }
+
 }

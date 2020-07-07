@@ -3,10 +3,10 @@ services:
   mysql_dev:
     image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=shura-api
-      - MYSQL_DATABASE=shura-api
-      - MYSQL_USER=shura-api
-      - MYSQL_PASSWORD=server-api
+      - MYSQL_ROOT_PASSWORD=vd-server-api
+      - MYSQL_DATABASE=vd-server-api
+      - MYSQL_USER=vd-server-api
+      - MYSQL_PASSWORD=vd-server-api
     expose:
       - '3306'
     ports:
